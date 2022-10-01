@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginWithSetInterval</title>
+    <link rel="stylesheet" href="asset/stylesheet.css">
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+  background: linear-gradient(326deg, rgba(10,236,112,1) 4%, rgba(14,136,112,1) 100%);
+   height: 100vh;
+      
+}
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 ;
+  margin: auto;
+  border-radius: 8px;
+  /* border: 1px solid red; */
+}
+.form {
+  position: relative;
+  z-index: 1;
+  /* border: 1px solid red; */
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+ /* border: 1px solid red; */
+  transition: all 0.3 ;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal {
+  background-color: rgb(223, 28, 28);
+   color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  display: none;
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  transition: all 1s linear;
+}
+.form>span:nth-of-type(1){
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  top: 60px;
+  left: 50px;
+  font-size: 14px;
+  transition: .4s;
+}
+.form>span:nth-of-type(2){
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  top: 120px;
+  left: 50px;
+  font-size: 14px;
+  transition: .4s;
+}
+    </style>
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="form">
+            <input type="text"  class="username" onfocusin="_in()" onfocusout="_out(this)">
+            <span>username</span>
+            <input type="password"  class="password" onfocusin="_inpass()" onfocusout="_outpass(this)">
+            <span>password</span>
+            <button onclick="validation()">LOGIN</button>
+            <p class="message">Not registered? <a>Create an account</a></p>
+        </div>
+    </div>
+    <div class="modal">
+        لطفا اطلاعات لازم را به درستی وارد کنید
+    </div>
+</body>
+<script>
+    let user = document.querySelector('.username')
+    let pass = document.querySelector('.password')
+    let modal = document.querySelector('.modal')
+
+    function validation() {
+        let userval = user.value
+        let passval = pass.value
+
+        if (userval.length < 12 || passval.length < 8) {
+            // alert('serror')
+            modal.style.background = 'red'
+            modal.innerHTML = 'Username should be more than 12 characters and password should be more than 8 characters'
+            modal.style.display = 'block'
+
+        } else {
+            modal.style.background = 'green'
+            modal.innerHTML = 'Login was successful'
+ 
+            modal.style.display = 'block'
+        }
+        // console.log(userval,passval)
+        setInterval(function () {
+            modal.style.display = 'none'
+
+        }, 4000)
+    }
+
+    let usern= document.querySelector('.form>span:nth-of-type(1)')
+    let passn= document.querySelector('.form>span:nth-of-type(2)')
+    function _in(){
+        usern.style.top='35px'
+        usern.style.left='60px'
+        usern.style.color='green'
+    }
+
+    function _out(self){
+        if((self.value) == ''){
+            usern.style.top='60px'
+            usern.style.left='60px'
+            
+        }
+    }
+
+    function _inpass(){
+        passn.style.top='95px'
+        passn.style.left='60px'
+        passn.style.color='green'
+    }
+
+    function _outpass(self){
+        if((self.value) == ''){
+            passn.style.top='120px'
+            passn.style.left='60px'
+           
+        }
+    }
+</script>
+
+</html>
